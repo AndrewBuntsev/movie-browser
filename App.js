@@ -1,19 +1,17 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './components/HomeScreen';
+import SearchScreen from './components/SearchScreen';
 import DetailsScreen from './components/DetailsScreen';
-import ModalScreen from './components/ModalScreen';
 
 
 const AppStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Search: SearchScreen,
     Details: DetailsScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Search',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#f4511e',
@@ -26,22 +24,9 @@ const AppStack = createStackNavigator(
   }
 );
 
-const RootStack = createStackNavigator(
-  {
-    Main: {
-      screen: AppStack,
-    },
-    MyModal: {
-      screen: ModalScreen,
-    },
-  },
-  {
-    mode: 'card',
-    headerMode: 'none',
-  }
-);
 
-const AppContainer = createAppContainer(RootStack);
+
+const AppContainer = createAppContainer(AppStack);
 
 export default class App extends React.Component {
 

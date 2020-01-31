@@ -1,5 +1,6 @@
 # Project 2 - Movie Browser
 https://docs.cs50.net/mobile/2020/x/projects/2/project2.html
+https://reactnavigation.org/docs/en/hello-react-navigation.html
 
 For this project, you'll be implementing a movie browser. It will allow users to
 search for movies included in the [Open Movie Database](http://www.omdbapi.com/)
