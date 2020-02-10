@@ -43,6 +43,9 @@ export default class SearchScreen extends React.Component {
 
     //Display the first chunk
     this.setState({ searchResults: firstChunk.Search, totalResults: firstChunk.totalResults, currentPage: 1 });
+
+    //Load the second chunck
+    await this.loadChunk();
   };
 
   //Loads the next data chunck
@@ -58,12 +61,6 @@ export default class SearchScreen extends React.Component {
     if (nextChunk.Response != 'True') return;
     this.setState(state => ({ searchResults: [...state.searchResults, ...nextChunk.Search], currentPage: state.currentPage + 1 }));
   };
-
-  // //Determines is the scroll view
-  // isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
-  //   const paddingToBottom = 20;
-  //   return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
-  // };
 
   //Checks if the ScrollView is close to the bottom, loads the next data chunk
   onScroll = e => {
@@ -119,7 +116,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     width: '50%'
   },
-
   resultsArea: {
     flex: 1,
     marginTop: 10,

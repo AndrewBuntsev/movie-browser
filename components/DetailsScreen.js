@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
 import * as MoviesAPI from '../omdbapi';
@@ -45,13 +45,17 @@ export default class DetailsScreen extends React.Component {
   render() {
     const item = this.state.item;
 
+    const dimensions = Dimensions.get('window');
+    const imageHeight = Math.round(dimensions.height / 2);
+    const imageWidth = dimensions.width;
+
     const internetMovieRating = item.Ratings ? item.Ratings.find(r => r.Source == 'Internet Movie Database') : null;
     const rottenTomatoesRating = item.Ratings ? item.Ratings.find(r => r.Source == 'Rotten Tomatoes') : null;
 
     return (item.Title ?
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView>
 
-        <Image source={{ uri: item.Poster }} style={styles.poster} resizeMode="contain" />
+        <Image source={{ uri: item.Poster }} style={{ height: imageHeight, width: imageWidth }} resizeMode="contain" />
 
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>
@@ -137,26 +141,11 @@ DetailsScreen.propTypes = {
 
 
 const styles = StyleSheet.create({
-  container: {
-    //flex: 1,
-    //flexDirection: 'column',
-    //justifyContent: 'flex-start',
-    //alignItems: 'stretch'
-  },
-  poster: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    height: '50%',
-    width: '100%'
-  },
   detailsContainer: {
-    //flex: 1,
-    marginTop: 400,
+    marginTop: 10,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    marginBottom: 10
   },
   title: {
     fontFamily: 'serif',
@@ -164,8 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
   paragraph: {
-    marginTop: 10,
-    // flexDirection: 'row'
+    marginTop: 10
   },
   paragraphTitle: {
     fontWeight: 'bold'
